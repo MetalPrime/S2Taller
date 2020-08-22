@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         inputAnswerPutted = findViewById(R.id.inputAnswerPutted);
         viewPuntaction = findViewById(R.id.viewPuntaction);
 
-
+        buttonSelection.setOnClickListener(
+                (v)->{
+                    Toast.makeText(this,"Funciona",Toast.LENGTH_LONG);
+                }
+        );
     }
+
+
 }
