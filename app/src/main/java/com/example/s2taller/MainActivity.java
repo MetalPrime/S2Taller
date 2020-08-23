@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -66,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
         questions.add(new Question("1000-7","993"));
         questions.add(new Question("50/5","10"));
 
-
-
-
+        //Método Random
+        randomQuestion = new Random();
+        selectedQuestion = randomQuestion.nextInt(questions.size());
+        viewQuestion.setText(questions.get(selectedQuestion).getQuestion());
+        tryAgainButton.setVisibility(View.GONE);
 
 
 
@@ -83,16 +86,29 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("titulo","Esta funcionando");
                         };
                     }*/
+
                     //Método con Random
-                    randomQuestion = new Random();
-                    selectedQuestion = randomQuestion.nextInt(questions.size());
                     selectAnswer = questions.get(selectedQuestion).getAnswer();
-                    viewQuestion.setText(questions.get(selectedQuestion).getQuestion());
+
 
                 if(inputAnswerPutted.getText().toString().equals(selectAnswer)){
                     questions.remove(selectedQuestion);
                     Log.e("titulo","Esta funcionando");
+
+                    if(questions.size()==0){
+                        questions.add(new Question("Felicidades Terminaste", "Cerrar app"));
+                        buttonSelection.setVisibility(View.GONE);
+                    }
+                    //Método con Random
+                    selectedQuestion = randomQuestion.nextInt(questions.size());
+                    
+                    viewQuestion.setText(questions.get(selectedQuestion).getQuestion());
+                } else {
+                    Log.e("no valid","Respuesta incorrecta");
+                    tryAgainButton.setVisibility(View.VISIBLE);
                 }
+
+                ///////////////////////
 
 
                 }
