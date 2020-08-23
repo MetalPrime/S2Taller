@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int nextQuestion;
     private String selectedAnswer;
+    private int updatePunctation;
 
 
     @Override
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         viewQuestion.setText(questions.get(selectedQuestion).getQuestion());
         tryAgainButton.setVisibility(View.GONE);
 
+        updatePunctation = Integer.parseInt(viewPuntaction.getText().toString());
 
 
         buttonSelection.setOnClickListener(
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         };
                     }*/
 
-                    //Método con Random
+                    ///////////////////Método con Random
                     selectAnswer = questions.get(selectedQuestion).getAnswer();
 
 
@@ -101,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     //Método con Random
                     selectedQuestion = randomQuestion.nextInt(questions.size());
-                    
+                    updatePunctation +=15;
+                    viewPuntaction.setText(Integer.toString(updatePunctation));
                     viewQuestion.setText(questions.get(selectedQuestion).getQuestion());
                 } else {
                     Log.e("no valid","Respuesta incorrecta");
@@ -113,6 +116,14 @@ public class MainActivity extends AppCompatActivity {
 
                 }
         );
+
+        tryAgainButton.setOnClickListener(
+                (v)->{
+                    
+                }
+        );
+
+
     }
 
 
