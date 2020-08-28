@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private String selectAnswer;
     private Random randomQuestion;
     private int selectedQuestion;
-    private Question mensajeFail= new Question();
-    private Question mensajeWin = new Question();
+    private Question mensajeFail;
+    private Question mensajeWin;
+    private Question mensajeTimeOut;
     //Variables en generador de generador de preguntas random
 
 
@@ -56,7 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
         questions = new ArrayList<Question>();
         //Método Bonito
+         mensajeFail = new Question();
+         mensajeWin = new Question();
+         mensajeTimeOut= new Question();
 
+        mensajeFail.setQuestion("Respuesta Incorrecta Intenta de Nuevo");
+        mensajeWin.setQuestion("Ganaste Bn hecho");
+        mensajeTimeOut.setQuestion("Se acabo el tiempo");
 
 
 
@@ -80,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                         updateCronometer = 0;
                                         Log.e("no valid","Respuesta incorrecta");
                                         questions.removeAll(questions);
-                                       // questions.add(new Question("Has fallado, Gracias por jugar", "Cerrar app"));
+                                        viewQuestion.setText(mensajeTimeOut.getQuestion());
                                         tryAgainButton.setVisibility(View.VISIBLE);
                                         Thread.interrupted();
                                     } else{
@@ -103,10 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         restart();
 
-        mensajeFail.setAnswer("Respuesta Incorrecta Intenta de Nuevo");
-        mensajeFail.setQuestion("Respuesta Incorrecta Intenta de Nuevo");
-        mensajeWin.setQuestion("Ganaste Bn hecho");
-        mensajeWin.setAnswer("Ganaate Bn hecho");
+
     }
 
     public void mainActions(){
@@ -140,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if(questions.size()==0){
                             questions.add(mensajeWin);
-
+                            viewQuestion.setText(mensajeWin.getQuestion());
                             buttonSelection.setVisibility(View.GONE);
 
                         }
@@ -154,9 +158,10 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Log.e("no valid","Respuesta incorrecta");
                         questions.removeAll(questions);
-
+                        buttonSelection.setVisibility(View.GONE);
                         questions.add(mensajeFail);
                         tryAgainButton.setVisibility(View.VISIBLE);
+                        viewQuestion.setText(mensajeFail.getQuestion());
 
                     }
 
@@ -175,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     viewPuntaction.setText("0");
                     updatePunctation = 0;
                     Log.e("titulo","Se reinicio");
-
+                    buttonSelection.setVisibility(View.VISIBLE);
                 }
         );
     }
