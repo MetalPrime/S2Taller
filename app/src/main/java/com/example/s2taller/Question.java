@@ -22,8 +22,8 @@ public class Question {
         randomNumber1 = new Random();
         randomNumber2 = new Random();
         randomSigno = new Random();
-        numero1 = randomNumber1.nextInt(100);
-        numero2 = randomNumber2.nextInt(75);
+        numero1 = randomNumber1.nextInt(20);
+        numero2 = randomNumber2.nextInt(5)+1;
         signoValue = randomSigno.nextInt(4);
         //Log.e("RANDOMaker",this.question);
     }

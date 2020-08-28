@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private String selectAnswer;
     private Random randomQuestion;
     private int selectedQuestion;
-
+    private Question mensajeFail= new Question();
+    private Question mensajeWin = new Question();
     //Variables en generador de generador de preguntas random
 
 
@@ -55,12 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         questions = new ArrayList<Question>();
         //Método Bonito
-        //Se generan las preguntas aleatorias
-        for(int i=0;i<50; i++){
-            questions.add(new Question());
-            questions.get(i).GenerateRamdomQuestion();
-            Log.e("Prueba Señorial",questions.get(i).getQuestion());
-        }
+
+
 
 
         updateCronometer = 30;
@@ -106,10 +103,20 @@ public class MainActivity extends AppCompatActivity {
 
         restart();
 
-
+        mensajeFail.setAnswer("Respuesta Incorrecta Intenta de Nuevo");
+        mensajeFail.setQuestion("Respuesta Incorrecta Intenta de Nuevo");
+        mensajeWin.setQuestion("Ganaste Bn hecho");
+        mensajeWin.setAnswer("Ganaate Bn hecho");
     }
 
     public void mainActions(){
+
+        //Se generan las preguntas aleatorias
+        for(int i=0;i<50; i++){
+            questions.add(new Question());
+            questions.get(i).GenerateRamdomQuestion();
+            Log.e("Prueba Señorial",questions.get(i).getQuestion());
+        }
 
         randomQuestion = new Random();
         selectedQuestion = randomQuestion.nextInt(questions.size());
@@ -132,11 +139,11 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("titulo","Esta funcionando");
 
                         if(questions.size()==0){
-                           // questions.add(new Question("Felicidades Terminaste", "Cerrar app"));
+                            questions.add(mensajeWin);
+
                             buttonSelection.setVisibility(View.GONE);
-                            Thread.interrupted();
+
                         }
-                        //Método con Random
                         selectedQuestion = randomQuestion.nextInt(questions.size());
                         updatePunctation +=15;
                         viewPuntaction.setText(Integer.toString(updatePunctation));
@@ -144,13 +151,12 @@ public class MainActivity extends AppCompatActivity {
                         updateCronometer = 30;
 
 
-
-
                     } else {
                         Log.e("no valid","Respuesta incorrecta");
                         questions.removeAll(questions);
+
+                        questions.add(mensajeFail);
                         tryAgainButton.setVisibility(View.VISIBLE);
-                        buttonSelection.setVisibility(View.GONE);
 
                     }
 
